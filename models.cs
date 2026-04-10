@@ -299,6 +299,8 @@ namespace CampaignEngine
         FixedAmountDiscount = 2, // Sabit tutar indirim
         FixedPrice = 3,         // Sabit fiyat uygulaması
         FreeProduct = 4,        // Ücretsiz ürün
-        BuyXPayY = 5            // 3 al 2 öde vb.
+        BuyXPayY = 5,           // 3 al 2 öde vb.
+        BuyXGetNthPercentOff = 6,  // X al, N. ürüne % indirim
+        BuyXGetNthAmountOff = 7    // X al, N. ürüne sabit tutar indirim
     }
 }

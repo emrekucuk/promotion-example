@@ -212,6 +212,17 @@ public class PromotionEngine
                     var freeCount = set * (benefit.BuyQuantity.Value - benefit.PayQuantity.Value);
                     total += freeCount * item.SalePrice;
                     break;
+
+                case BenefitType.BuyXGetNthPercentOff:
+                case BenefitType.BuyXGetNthAmountOff:
+                    var nthMaxSets = maxUsagePerCart ?? int.MaxValue;
+                    var nthSets = Math.Min((int)(eligibleQty / benefit.BuyQuantity.Value), nthMaxSets);
+                    var nthDiscountedQty = nthSets * (benefit.Quantity ?? 1);
+                    if (benefit.Type == BenefitType.BuyXGetNthPercentOff)
+                        total += item.SalePrice * nthDiscountedQty * (benefit.Value ?? 0) / 100;
+                    else
+                        total += (benefit.Value ?? 0) * nthDiscountedQty;
+                    break;
             }
         }
 
@@ -311,6 +322,19 @@ public class PromotionEngine
                     item.DiscountTotal += free * item.SalePrice;
                     item.NonEligableQuantity += Convert.ToInt32(free);
                     item.BenefitType = BenefitType.BuyXPayY;
+                    break;
+
+                case BenefitType.BuyXGetNthPercentOff:
+                case BenefitType.BuyXGetNthAmountOff:
+                    var nthMaxSets = maxUsagePerCart ?? int.MaxValue;
+                    var nthSets = Math.Min((int)(eligibleQty / benefit.BuyQuantity.Value), nthMaxSets);
+                    var nthDiscountedQty = nthSets * (benefit.Quantity ?? 1);
+                    if (benefit.Type == BenefitType.BuyXGetNthPercentOff)
+                        item.DiscountTotal += item.SalePrice * nthDiscountedQty * (benefit.Value ?? 0) / 100;
+                    else
+                        item.DiscountTotal += (benefit.Value ?? 0) * nthDiscountedQty;
+                    item.NonEligableQuantity += nthDiscountedQty;
+                    item.BenefitType = benefit.Type;
                     break;
             }
         }

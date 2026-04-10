@@ -5,11 +5,16 @@ project.lock.json
 *.pyc
 nupkg/
 
+bin/
+obj/
+
 # Visual Studio Code
 .vscode
 
 # Claude
 CLAUDE.md
+
+*.Assembly*
 
 # Rider
 .idea
@@ -41,18 +46,3 @@ msbuild.wrn
 
 # Omnisharp
 mono_crash.mem.*
-
-temp/
-Jobs/SpecialPurpose/Jobs.SpecialPurpose.EbysPackager/wwwroot/
-Jobs/SpecialPurpose/Jobs.SpecialPurpose.EbysPdfGenarator/wwwroot/
-Jobs/Migrators/Jobs.Migrator.EbysMigrator/wwwroot/
-Jobs/Migrators/Jobs.Migrator.EbysMigrator/wwwroot4/
-Jobs/Migrators/Jobs.Migrator.EbysMigrator/wwwroot3/
-Jobs/Migrators/Jobs.Migrator.EbysMigrator/wwwroot-teknoloji/
-Jobs/Migrators/Jobs.Migrator.EbysMigrator/wwwroot-holding/
-Jobs/Migrators/Jobs.Migrator.EbysMigrator/wwwroot-tohumculuk/
-Jobs/Migrators/Jobs.Migrator.EbysMigrator/publish/
-BusinessModules/Ebys/BusinessModules.Ebys.Api/wwwroot/
-BaseModules/FileProvider/BaseModules.FileProvider.Api/wwwroot/
-BusinessModules/Ebys/BusinessModules.Ebys.EventWorker/wwwroot/
-BusinessModules/Ebys/BusinessModules.Ebys.FileProvider/wwwroot/

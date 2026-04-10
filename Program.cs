@@ -25,6 +25,9 @@ class Program
         var ulker = Guid.Parse("44f29311-6ab1-4fd2-958d-6ed94f127854");
         var sepet = Guid.Parse("46049707-e8a1-4d6d-9171-67a1828a6316");
         var patos = Guid.Parse("fb6e8d24-34c0-4816-8551-a2246eddf9bc");
+        var doritos = Guid.Parse("44922627-34f2-47bf-a4d8-d6c4676bf89f");
+        var lays = Guid.Parse("204d9264-bc7b-46fb-b105-16526a742201");
+
 
         // =========================
         // SALE
@@ -46,6 +49,8 @@ class Program
                 new SaleItem { ProductId = ulker, Quantity = 1, SalePrice = 20 , TotalPrice = 20},
                 new SaleItem { ProductId = sepet, Quantity = 2, SalePrice = 2000 , TotalPrice = 4000},
                 new SaleItem { ProductId = patos, Quantity = 4, SalePrice = 10 , TotalPrice = 20},
+                new SaleItem { ProductId = doritos, Quantity = 2, SalePrice = 30 , TotalPrice = 60},
+                new SaleItem { ProductId = lays, Quantity = 4, SalePrice = 50 , TotalPrice = 5},
             },
         };
         sale.GrandTotal = sale.SaleItems.Sum(x => x.SalePrice * x.Quantity);
@@ -382,6 +387,83 @@ class Program
                                     Type = BenefitType.FreeProduct,
                                     ProductId = patos,
                                     Quantity = 1
+                                }
+                            }
+                        }
+                    }
+                },
+
+                // 10 - doritos 2 al 2. ürüne %50
+                new Promotion
+                {
+                    Priority = 5,
+                    ConditionGroups = new List<PromotionConditionGroup>
+                    {
+                        new PromotionConditionGroup
+                        {
+                            Conditions = new List<PromotionCondition>
+                            {
+                                new PromotionCondition
+                                {
+                                    Type = ConditionType.ProductQuantity,
+                                    ProductId = doritos,
+                                    MinQuantity = 2,
+                                }
+                            }
+                        }
+                    },
+                    BenefitGroups = new List<PromotionBenefitGroup>
+                    {
+                        new PromotionBenefitGroup
+                        {
+                            Benefits = new List<PromotionBenefit>
+                            {
+                                new PromotionBenefit
+                                {
+                                    Type = BenefitType.BuyXGetNthPercentOff,
+                                    ProductId = doritos,
+                                    BuyQuantity = 2,
+                                    Quantity = 1,
+                                    Value = 50
+                                }
+                            }
+                        }
+                    }
+                },
+
+                // 11 - lays 2 al 2. ürüne 40 TL indirim
+                new Promotion
+                {
+                    Priority = 5,
+                    MaxUsagePerCart = 1,
+                    ConditionGroups = new List<PromotionConditionGroup>
+                    {
+                        new PromotionConditionGroup
+                        {
+                            Conditions = new List<PromotionCondition>
+                            {
+                                new PromotionCondition
+                                {
+                                    Type = ConditionType.ProductQuantity,
+                                    ProductId = lays,
+                                    MinQuantity = 2,
+                                }
+                            }
+                        }
+                    },
+                    BenefitGroups = new List<PromotionBenefitGroup>
+                    {
+                        new PromotionBenefitGroup
+                        {
+                            Benefits = new List<PromotionBenefit>
+                            {
+                                new PromotionBenefit
+                                {
+                                    Type = BenefitType.BuyXGetNthAmountOff,
+                                    ProductId = lays,
+                                    BuyQuantity = 2,
+                                    // Quantity = 1,
+                                    Value = 40
                                 }
                             }
                         }
