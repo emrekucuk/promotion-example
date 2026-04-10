@@ -177,31 +177,38 @@ public class PromotionEngine
 
         foreach (var item in items)
         {
-            var qty = item.Quantity;
+            var eligibleQty = item.Quantity - item.NonEligableQuantity;
+            if (eligibleQty <= 0)
+                continue;
+
+            var cappedQty = maxUsagePerCart.HasValue
+                ? Math.Min(eligibleQty, maxUsagePerCart.Value)
+                : eligibleQty;
 
             switch (benefit.Type)
             {
                 case BenefitType.PercentageDiscount:
-                    total += item.SalePrice * qty * (benefit.Value ?? 0) / 100;
+                    total += item.SalePrice * cappedQty * (benefit.Value ?? 0) / 100;
                     break;
 
                 case BenefitType.FixedAmountDiscount:
-                    total += (benefit.Value ?? 0) * qty;
+                    total += (benefit.Value ?? 0) * cappedQty;
                     break;
 
                 case BenefitType.FixedPrice:
                     total += Math.Max(0,
-                        (item.SalePrice - (benefit.Value ?? item.SalePrice)) * qty);
+                        (item.SalePrice - (benefit.Value ?? item.SalePrice)) * cappedQty);
                     break;
 
                 case BenefitType.FreeProduct:
                     var freeQty = Math.Min(benefit.Quantity ?? 1, maxUsagePerCart ?? int.MaxValue);
+                    freeQty = (int)Math.Min(freeQty, eligibleQty);
                     total += item.SalePrice * freeQty;
                     break;
 
                 case BenefitType.BuyXPayY:
                     var maxSets = maxUsagePerCart ?? int.MaxValue;
-                    var set = Math.Min((int)(qty / benefit.BuyQuantity.Value), maxSets);
+                    var set = Math.Min((int)(eligibleQty / benefit.BuyQuantity.Value), maxSets);
                     var freeCount = set * (benefit.BuyQuantity.Value - benefit.PayQuantity.Value);
                     total += freeCount * item.SalePrice;
                     break;
