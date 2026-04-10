@@ -24,16 +24,16 @@
 //             Id = Guid.Parse("25a5c681-5f82-492d-a104-aeb9d89c77f8"),
 //             SaleItems = new List<SaleItem>
 //     {
-//         new SaleItem { ProductId = gazoz, Quantity = 3, SalePrice = 20, PriceTotal = 60 },
-//         new SaleItem { ProductId = yogurt, Quantity = 2, SalePrice = 30, PriceTotal = 60 },
-//         new SaleItem { ProductId = kola, Quantity = 1, SalePrice = 40, PriceTotal = 40 },
-//         new SaleItem { ProductId = ayran, Quantity = 1, SalePrice = 15, PriceTotal = 15 },
-//         new SaleItem { ProductId = cay, Quantity = 1, SalePrice = 30, PriceTotal = 30 },
-//         new SaleItem { ProductId = simit, Quantity = 2, SalePrice = 10, PriceTotal = 20 },
-//         new SaleItem { ProductId = ekmek, Quantity = 1, SalePrice = 15, PriceTotal = 15 },
-//         new SaleItem { ProductId = kahve, Quantity = 1, SalePrice = 50, PriceTotal = 50 },
-//         new SaleItem { ProductId = kalem, Quantity = 1, SalePrice = 40, PriceTotal = 40 },
-//         new SaleItem { ProductId = ulkerGofret, Quantity = 1, SalePrice = 25, PriceTotal = 25 }
+//         new SaleItem { ProductId = gazoz, Quantity = 3, SalePrice = 20, TotalPrice = 60 },
+//         new SaleItem { ProductId = yogurt, Quantity = 2, SalePrice = 30, TotalPrice = 60 },
+//         new SaleItem { ProductId = kola, Quantity = 1, SalePrice = 40, TotalPrice = 40 },
+//         new SaleItem { ProductId = ayran, Quantity = 1, SalePrice = 15, TotalPrice = 15 },
+//         new SaleItem { ProductId = cay, Quantity = 1, SalePrice = 30, TotalPrice = 30 },
+//         new SaleItem { ProductId = simit, Quantity = 2, SalePrice = 10, TotalPrice = 20 },
+//         new SaleItem { ProductId = ekmek, Quantity = 1, SalePrice = 15, TotalPrice = 15 },
+//         new SaleItem { ProductId = kahve, Quantity = 1, SalePrice = 50, TotalPrice = 50 },
+//         new SaleItem { ProductId = kalem, Quantity = 1, SalePrice = 40, TotalPrice = 40 },
+//         new SaleItem { ProductId = ulkerGofret, Quantity = 1, SalePrice = 25, TotalPrice = 25 }
 //     }
 //         };
 
@@ -310,7 +310,7 @@
 //             Console.WriteLine($"Ürün: {item.ProductId}");
 //             Console.WriteLine($"Adet: {item.Quantity}");
 //             Console.WriteLine($"Promosyon Tipi: {item.DiscountCampaignType}");
-//             Console.WriteLine($"PriceTotal: {item.PriceTotal}");
+//             Console.WriteLine($"TotalPrice: {item.TotalPrice}");
 //             Console.WriteLine($"SalePrice: {item.SalePrice}");
 //             Console.WriteLine($"İndirim: {item.DiscountTotal}");
 //             Console.WriteLine($"NonEligible: {item.NonEligableQuantity}");

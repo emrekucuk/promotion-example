@@ -6,10 +6,10 @@ namespace CampaignEngine
         public Guid Id { get; set; }
 
         public double DiscountTotal { get; set; }
-        public double CartTotalDiscount { get; set; }
+        public double CartDiscountTotal { get; set; }
 
         public List<SaleItem> SaleItems { get; set; } = new();
-        public double TotalPrice { get; internal set; }
+        public double GrandTotal { get; internal set; }
     }
 
     public class SaleItem
@@ -18,7 +18,7 @@ namespace CampaignEngine
         public Guid ProductVersionId { get; set; }
         public double Quantity { get; set; }
         public double TotalTax { get; set; }
-        public double PriceTotal { get; set; } // Örn: 150 3 al 2 öde 
+        public double TotalPrice { get; set; } // Örn: 150 3 al 2 öde 
         public double GrandTotal { get; set; } //100
         public double DiscountTotal { get; set; }
         public double SalePrice { get; set; }

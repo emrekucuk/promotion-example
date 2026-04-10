@@ -88,7 +88,7 @@
 //                         .Sum(x => x.Quantity) >= (cond.MinQuantity ?? 0);
 
 //                 case ConditionType.CartTotal:
-//                     return sale.SaleItems.Sum(x => x.PriceTotal) >= (cond.Value ?? 0);
+//                     return sale.SaleItems.Sum(x => x.TotalPrice) >= (cond.Value ?? 0);
 //             }
 
 //             return false;
@@ -177,7 +177,7 @@
 //             // Cart-level % indirim için
 //             if (!benefit.ProductId.HasValue && benefit.Type == BenefitType.PercentageDiscount)
 //             {
-//                 var totalPrice = sale.SaleItems.Sum(x => x.PriceTotal);
+//                 var totalPrice = sale.SaleItems.Sum(x => x.TotalPrice);
 //                 var applicable = benefit.MaxApplicableAmount.HasValue
 //                                  ? Math.Min(totalPrice, benefit.MaxApplicableAmount.Value)
 //                                  : totalPrice;
@@ -197,14 +197,14 @@
 //             {
 //                 if (benefit.Type == BenefitType.PercentageDiscount)
 //                 {
-//                     var total = sale.SaleItems.Sum(x => x.PriceTotal);
+//                     var total = sale.SaleItems.Sum(x => x.TotalPrice);
 //                     var applicable = benefit.MaxApplicableAmount.HasValue
 //                                      ? Math.Min(total, benefit.MaxApplicableAmount.Value)
 //                                      : total;
 
 //                     foreach (var item in sale.SaleItems)
 //                     {
-//                         var portion = item.PriceTotal / total;
+//                         var portion = item.TotalPrice / total;
 //                         item.DiscountTotal += Math.Round(applicable * (benefit.Value ?? 0) / 100 * portion, 2);
 //                     }
 //                 }

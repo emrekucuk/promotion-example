@@ -31,13 +31,13 @@ public class PromotionEngine
 
 
         // Toplam indirim = ürün + sepet
-        sale.DiscountTotal = itemDiscounts + sale.CartTotalDiscount;
+        sale.DiscountTotal = itemDiscounts + sale.CartDiscountTotal;
     }
 
     private void ResetSale(Sale sale)
     {
         sale.DiscountTotal = 0;
-        sale.CartTotalDiscount = 0; // <--- sepette sıfırla
+        sale.CartDiscountTotal = 0; // <--- sepette sıfırla
 
         foreach (var item in sale.SaleItems)
         {
@@ -105,7 +105,7 @@ public class PromotionEngine
             case ConditionType.CartTotal:
                 System.Console.WriteLine("");
                 //TODO: (emre.kucuk) burada total price yerine sale'deki total'e de bakilabilir
-                var cartTotal = sale.TotalPrice;
+                var cartTotal = sale.GrandTotal;
                 return cond.Operator switch
                 {
                     OperatorType.GreaterThan => cartTotal > (cond.Value ?? 0),
@@ -218,7 +218,7 @@ public class PromotionEngine
         // Sepet bazlı indirimleri de simule et
         if (!benefit.ProductId.HasValue)
         {
-            var totalCart = sale.SaleItems.Sum(x => x.PriceTotal);
+            var totalCart = sale.SaleItems.Sum(x => x.TotalPrice);
             if (benefit.Type == BenefitType.PercentageDiscount)
             {
                 var discount = totalCart * (benefit.Value ?? 0) / 100;
@@ -246,7 +246,7 @@ public class PromotionEngine
         // CART discount (ProductId null ise)
         if (!benefit.ProductId.HasValue)
         {
-            var total = sale.SaleItems.Sum(x => x.PriceTotal);
+            var total = sale.SaleItems.Sum(x => x.TotalPrice);
             double discount = 0;
 
             if (benefit.Type == BenefitType.PercentageDiscount)
@@ -257,7 +257,7 @@ public class PromotionEngine
             if (benefit.MaxDiscount.HasValue)
                 discount = Math.Min(discount, benefit.MaxDiscount.Value);
 
-            sale.CartTotalDiscount += discount;
+            sale.CartDiscountTotal += discount;
             return;
         }
 

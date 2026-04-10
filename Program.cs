@@ -33,22 +33,22 @@ class Program
         {
             SaleItems = new List<SaleItem>
             {
-                new SaleItem { ProductId = gazoz, Quantity = 3, SalePrice = 20, PriceTotal =60},
-                new SaleItem { ProductId = yogurt, Quantity = 2, SalePrice = 30 , PriceTotal =60},
-                new SaleItem { ProductId = kola, Quantity = 1, SalePrice = 40 , PriceTotal =40},
-                new SaleItem { ProductId = ayran, Quantity = 1, SalePrice = 15 , PriceTotal =15},
-                new SaleItem { ProductId = simit, Quantity = 2, SalePrice = 10, PriceTotal =20},
-                new SaleItem { ProductId = cay, Quantity = 1, SalePrice = 15 , PriceTotal =15},
-                new SaleItem { ProductId = su, Quantity = 1, SalePrice = 25, PriceTotal = 25},
-                new SaleItem { ProductId = ekmek, Quantity = 1, SalePrice = 12 , PriceTotal =12},
-                new SaleItem { ProductId = kahve, Quantity = 1, SalePrice = 50 , PriceTotal = 50},
-                new SaleItem { ProductId = kalem, Quantity = 1, SalePrice = 40 , PriceTotal = 40},
-                new SaleItem { ProductId = ulker, Quantity = 1, SalePrice = 20 , PriceTotal = 20},
-                new SaleItem { ProductId = sepet, Quantity = 2, SalePrice = 2000 , PriceTotal = 4000},
-                new SaleItem { ProductId = patos, Quantity = 4, SalePrice = 10 , PriceTotal = 20},
+                new SaleItem { ProductId = gazoz, Quantity = 3, SalePrice = 20, TotalPrice =60},
+                new SaleItem { ProductId = yogurt, Quantity = 2, SalePrice = 30 , TotalPrice =60},
+                new SaleItem { ProductId = kola, Quantity = 1, SalePrice = 40 , TotalPrice =40},
+                new SaleItem { ProductId = ayran, Quantity = 1, SalePrice = 15 , TotalPrice =15},
+                new SaleItem { ProductId = simit, Quantity = 2, SalePrice = 10, TotalPrice =20},
+                new SaleItem { ProductId = cay, Quantity = 1, SalePrice = 15 , TotalPrice =15},
+                new SaleItem { ProductId = su, Quantity = 1, SalePrice = 25, TotalPrice = 25},
+                new SaleItem { ProductId = ekmek, Quantity = 1, SalePrice = 12 , TotalPrice =12},
+                new SaleItem { ProductId = kahve, Quantity = 1, SalePrice = 50 , TotalPrice = 50},
+                new SaleItem { ProductId = kalem, Quantity = 1, SalePrice = 40 , TotalPrice = 40},
+                new SaleItem { ProductId = ulker, Quantity = 1, SalePrice = 20 , TotalPrice = 20},
+                new SaleItem { ProductId = sepet, Quantity = 2, SalePrice = 2000 , TotalPrice = 4000},
+                new SaleItem { ProductId = patos, Quantity = 4, SalePrice = 10 , TotalPrice = 20},
             },
         };
-        sale.TotalPrice = sale.SaleItems.Sum(x => x.SalePrice * x.Quantity);
+        sale.GrandTotal = sale.SaleItems.Sum(x => x.SalePrice * x.Quantity);
 
         // =========================
         // CAMPAIGN
@@ -410,9 +410,9 @@ class Program
             Console.WriteLine("----------------------");
         }
 
-        System.Console.WriteLine($"Sepet Tutari: {sale.TotalPrice}");
-        Console.WriteLine($"SEPET İNDİRİMI: {sale.CartTotalDiscount}");
+        System.Console.WriteLine($"Sepet Tutari: {sale.GrandTotal}");
+        Console.WriteLine($"SEPET İNDİRİMI: {sale.CartDiscountTotal}");
         Console.WriteLine($"TOPLAM İNDİRİM: {sale.DiscountTotal}");
-        Console.WriteLine($"TOPLAM Odenecek Tutar: {sale.TotalPrice - sale.DiscountTotal}");
+        Console.WriteLine($"TOPLAM Odenecek Tutar: {sale.GrandTotal - sale.DiscountTotal}");
     }
 }

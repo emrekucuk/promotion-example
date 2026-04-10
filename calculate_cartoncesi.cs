@@ -84,7 +84,7 @@
 //                         .Sum(x => x.Quantity) >= (cond.MinQuantity ?? 0);
 
 //                 case ConditionType.CartTotal:
-//                     // var a = sale.SaleItems.Sum(x => x.PriceTotal) >= (cond.Value ?? 0);
+//                     // var a = sale.SaleItems.Sum(x => x.TotalPrice) >= (cond.Value ?? 0);
 //                     var a = sale.TotalPrice >= (cond.Value ?? 0);
 //                     return a;
 //             }

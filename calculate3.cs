@@ -24,13 +24,13 @@
 //         var itemDiscounts = sale.SaleItems.Sum(x => x.DiscountTotal);
 
 //         // Toplam indirim = ürün + sepet
-//         sale.DiscountTotal = itemDiscounts + sale.CartTotalDiscount;
+//         sale.DiscountTotal = itemDiscounts + sale.CartDiscountTotal;
 //     }
 
 //     private void ResetSale(Sale sale)
 //     {
 //         sale.DiscountTotal = 0;
-//         sale.CartTotalDiscount = 0; // <--- sepette sıfırla
+//         sale.CartDiscountTotal = 0; // <--- sepette sıfırla
 
 //         foreach (var item in sale.SaleItems)
 //         {
@@ -89,7 +89,7 @@
 //                     .Sum(x => x.Quantity) >= (cond.MinQuantity ?? 0);
 
 //             case ConditionType.CartTotal:
-//                 return sale.SaleItems.Sum(x => x.PriceTotal) >= (cond.Value ?? 0);
+//                 return sale.SaleItems.Sum(x => x.TotalPrice) >= (cond.Value ?? 0);
 //         }
 
 //         return false;
@@ -179,7 +179,7 @@
 //         // Sepet bazlı indirimleri de simule et
 //         if (!benefit.ProductId.HasValue)
 //         {
-//             var totalCart = sale.SaleItems.Sum(x => x.PriceTotal);
+//             var totalCart = sale.SaleItems.Sum(x => x.TotalPrice);
 //             if (benefit.Type == BenefitType.PercentageDiscount)
 //                 total += totalCart * (benefit.Value ?? 0) / 100;
 //             else if (benefit.Type == BenefitType.FixedAmountDiscount)
@@ -188,7 +188,7 @@
 
 //         if (!benefit.ProductId.HasValue)
 //         {
-//             var totalCart = sale.SaleItems.Sum(x => x.PriceTotal);
+//             var totalCart = sale.SaleItems.Sum(x => x.TotalPrice);
 
 //             if (benefit.Type == BenefitType.PercentageDiscount)
 //             {
@@ -218,15 +218,15 @@
 //         // CART discount (ProductId null ise)
 //         if (!benefit.ProductId.HasValue)
 //         {
-//             var total = sale.SaleItems.Sum(x => x.PriceTotal);
+//             var total = sale.SaleItems.Sum(x => x.TotalPrice);
 
 //             // if (benefit.Type == BenefitType.PercentageDiscount)
 //             // {
-//             //     sale.CartTotalDiscount += total * (benefit.Value ?? 0) / 100;
+//             //     sale.CartDiscountTotal += total * (benefit.Value ?? 0) / 100;
 //             // }
 //             // else if (benefit.Type == BenefitType.FixedAmountDiscount)
 //             // {
-//             //     sale.CartTotalDiscount += (benefit.Value ?? 0);
+//             //     sale.CartDiscountTotal += (benefit.Value ?? 0);
 //             // }
 //             if (benefit.Type == BenefitType.PercentageDiscount)
 //             {
@@ -234,7 +234,7 @@
 
 //                 var discount = discountBase * (benefit.Value ?? 0) / 100;
 
-//                 sale.CartTotalDiscount += discount;
+//                 sale.CartDiscountTotal += discount;
 //             }
 //             else if (benefit.Type == BenefitType.FixedAmountDiscount)
 //             {
@@ -245,7 +245,7 @@
 //                     discount = Math.Min(discount, benefit.MaxApplicableAmount.Value);
 //                 }
 
-//                 sale.CartTotalDiscount += discount;
+//                 sale.CartDiscountTotal += discount;
 //             }
 
 //             return;

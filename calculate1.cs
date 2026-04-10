@@ -159,7 +159,7 @@
 //         public Guid ProductVersionId { get; set; }
 //         public double Quantity { get; set; }
 //         public double TotalTax { get; set; }
-//         public double PriceTotal { get; set; } // Örn: 150 3 al 2 öde 
+//         public double TotalPrice { get; set; } // Örn: 150 3 al 2 öde 
 //         public double GrandTotal { get; set; } //100
 //         public double DiscountTotal { get; set; }
 //         public double SalePrice { get; set; }
@@ -533,7 +533,7 @@
 //                         break;
 
 //                     case ConditionType.CartTotal:
-//                         value = sale.SaleItems.Sum(x => x.PriceTotal);
+//                         value = sale.SaleItems.Sum(x => x.TotalPrice);
 //                         break;
 //                 }
 
