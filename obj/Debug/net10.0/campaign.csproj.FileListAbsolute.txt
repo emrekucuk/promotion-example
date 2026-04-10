@@ -1,0 +1,14 @@
+/home/local/workspace/temp/campaign/bin/Debug/net10.0/campaign
+/home/local/workspace/temp/campaign/bin/Debug/net10.0/campaign.deps.json
+/home/local/workspace/temp/campaign/bin/Debug/net10.0/campaign.runtimeconfig.json
+/home/local/workspace/temp/campaign/bin/Debug/net10.0/campaign.dll
+/home/local/workspace/temp/campaign/bin/Debug/net10.0/campaign.pdb
+/home/local/workspace/temp/campaign/obj/Debug/net10.0/campaign.GeneratedMSBuildEditorConfig.editorconfig
+/home/local/workspace/temp/campaign/obj/Debug/net10.0/campaign.AssemblyInfoInputs.cache
+/home/local/workspace/temp/campaign/obj/Debug/net10.0/campaign.AssemblyInfo.cs
+/home/local/workspace/temp/campaign/obj/Debug/net10.0/campaign.csproj.CoreCompileInputs.cache
+/home/local/workspace/temp/campaign/obj/Debug/net10.0/campaign.dll
+/home/local/workspace/temp/campaign/obj/Debug/net10.0/refint/campaign.dll
+/home/local/workspace/temp/campaign/obj/Debug/net10.0/campaign.pdb
+/home/local/workspace/temp/campaign/obj/Debug/net10.0/campaign.genruntimeconfig.cache
+/home/local/workspace/temp/campaign/obj/Debug/net10.0/ref/campaign.dll
