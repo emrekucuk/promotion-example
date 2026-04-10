@@ -24,6 +24,7 @@ class Program
         var kalem = Guid.Parse("04ea9106-ed87-4f08-94a1-5aa26dbcc28d");
         var ulker = Guid.Parse("44f29311-6ab1-4fd2-958d-6ed94f127854");
         var sepet = Guid.Parse("46049707-e8a1-4d6d-9171-67a1828a6316");
+        var patos = Guid.Parse("fb6e8d24-34c0-4816-8551-a2246eddf9bc");
 
         // =========================
         // SALE
@@ -32,18 +33,19 @@ class Program
         {
             SaleItems = new List<SaleItem>
             {
-                // new SaleItem { ProductId = gazoz, Quantity = 3, SalePrice = 20, PriceTotal =60},
-                // new SaleItem { ProductId = yogurt, Quantity = 2, SalePrice = 30 , PriceTotal =60},
-                // new SaleItem { ProductId = kola, Quantity = 1, SalePrice = 40 , PriceTotal =40},
-                // new SaleItem { ProductId = ayran, Quantity = 1, SalePrice = 15 , PriceTotal =15},
-                // new SaleItem { ProductId = simit, Quantity = 2, SalePrice = 10, PriceTotal =20},
-                // new SaleItem { ProductId = cay, Quantity = 1, SalePrice = 15 , PriceTotal =15},
-                // new SaleItem { ProductId = su, Quantity = 1, SalePrice = 25, PriceTotal = 25},
-                // new SaleItem { ProductId = ekmek, Quantity = 1, SalePrice = 12 , PriceTotal =12},
-                // new SaleItem { ProductId = kahve, Quantity = 1, SalePrice = 50 , PriceTotal = 50},
-                // new SaleItem { ProductId = kalem, Quantity = 1, SalePrice = 40 , PriceTotal = 40},
-                // new SaleItem { ProductId = ulker, Quantity = 1, SalePrice = 20 , PriceTotal = 20},
-                new SaleItem { ProductId = sepet, Quantity = 2, SalePrice = 2000 , PriceTotal = 4000},
+                new SaleItem { ProductId = gazoz, Quantity = 3, SalePrice = 20, PriceTotal =60},
+                new SaleItem { ProductId = yogurt, Quantity = 2, SalePrice = 30 , PriceTotal =60},
+                new SaleItem { ProductId = kola, Quantity = 1, SalePrice = 40 , PriceTotal =40},
+                new SaleItem { ProductId = ayran, Quantity = 1, SalePrice = 15 , PriceTotal =15},
+                new SaleItem { ProductId = simit, Quantity = 2, SalePrice = 10, PriceTotal =20},
+                new SaleItem { ProductId = cay, Quantity = 1, SalePrice = 15 , PriceTotal =15},
+                new SaleItem { ProductId = su, Quantity = 1, SalePrice = 25, PriceTotal = 25},
+                new SaleItem { ProductId = ekmek, Quantity = 1, SalePrice = 12 , PriceTotal =12},
+                new SaleItem { ProductId = kahve, Quantity = 1, SalePrice = 50 , PriceTotal = 50},
+                new SaleItem { ProductId = kalem, Quantity = 1, SalePrice = 40 , PriceTotal = 40},
+                new SaleItem { ProductId = ulker, Quantity = 1, SalePrice = 20 , PriceTotal = 20},
+                // new SaleItem { ProductId = sepet, Quantity = 2, SalePrice = 2000 , PriceTotal = 4000},
+                new SaleItem { ProductId = patos, Quantity = 2, SalePrice = 60 , PriceTotal = 120},
             },
         };
         sale.TotalPrice = sale.SaleItems.Sum(x => x.SalePrice * x.Quantity);
@@ -347,7 +349,43 @@ class Program
                             }
                         }
                     }
-                }
+                },
+                // 9 - patos 1 alana 1 bedava
+
+                new Promotion
+                {
+                    Priority = 8,
+                    ConditionGroups = new List<PromotionConditionGroup>
+                    {
+                        new PromotionConditionGroup
+                        {
+                            Conditions = new List<PromotionCondition>
+                            {
+                                new PromotionCondition
+                                {
+                                    Type = ConditionType.ProductQuantity,
+                                    ProductId = patos,
+                                    MinQuantity = 2,
+                                }
+                            }
+                        }
+                    },
+                    BenefitGroups = new List<PromotionBenefitGroup>
+                    {
+                        new PromotionBenefitGroup
+                        {
+                            Benefits = new List<PromotionBenefit>
+                            {
+                                new PromotionBenefit
+                                {
+                                    Type = BenefitType.FreeProduct,
+                                    ProductId = patos,
+                                    Quantity = 1
+                                }
+                            }
+                        }
+                    }
+                },
             }
         };
 
@@ -372,6 +410,7 @@ class Program
         }
 
         System.Console.WriteLine($"Sepet Tutari: {sale.TotalPrice}");
+        Console.WriteLine($"SEPET İNDİRİMI: {sale.CartTotalDiscount}");
         Console.WriteLine($"TOPLAM İNDİRİM: {sale.DiscountTotal}");
         Console.WriteLine($"TOPLAM Odenecek Tutar: {sale.TotalPrice - sale.TotalPrice}");
     }

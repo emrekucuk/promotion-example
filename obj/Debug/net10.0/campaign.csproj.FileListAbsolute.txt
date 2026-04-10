@@ -12,3 +12,4 @@
 /home/local/workspace/temp/campaign/obj/Debug/net10.0/campaign.pdb
 /home/local/workspace/temp/campaign/obj/Debug/net10.0/campaign.genruntimeconfig.cache
 /home/local/workspace/temp/campaign/obj/Debug/net10.0/ref/campaign.dll
+/home/local/workspace/temp/campaign/obj/Debug/net10.0/campaign.sourcelink.json
