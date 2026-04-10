@@ -91,8 +91,6 @@ namespace CampaignEngine
         public string Name { get; set; }
 
         public int Priority { get; set; } = 0;
-        public bool IsCombinable { get; set; } = true;
-        public int? MaxUsagePerUser { get; set; }
         public int? MaxUsagePerCart { get; set; }
 
         public List<PromotionTarget> Targets { get; set; } = new List<PromotionTarget>();

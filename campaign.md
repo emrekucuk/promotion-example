@@ -1,10 +1,13 @@
-// 1️⃣ Gazoz 3 al 2 öde 
-// 2️⃣ Yoğurt %5
-// 3️⃣ Kola alana ayran bedava
-// 4️⃣ 2 simit veya 2 poğaça → çay veya su 10 TL
-// 5️⃣ Ekmek veya kurabiye → kahve %10
-// 6️⃣ Sepet 100 TL → kalem 25 TL
-// 7️⃣ Ülker gofret 15 TL
+Kampanya tipleri
+1- Gazoz 3 al 2 öde 
+2- Yoğurt %5
+3-  Kola alana ayran bedava
+4-  2 simit veya 2 poğaça → çay veya su 10 TL
+5- Ekmek veya kurabiye → kahve %10
+6- Sepet 100 TL → kalem 25 TL
+7- Ülker gofret 15 TL
+8- Sepet 100 lirayi gectiginde %10 indirim uygula ama maximum 300 lirayi gecmesin
+9- patos'ta 1 alana 1 bedava
 
 
 // // 8️⃣ Sepet 200 TL → %10 (max 1000 TL'ye kadar)

@@ -10,12 +10,10 @@ public class PromotionEngine
 
         ResetSale(sale);
 
-        var nonCombinableApplied = false;
 
         // foreach (var campaign in campaigns.Where(IsCampaignValid)) // buraya gelen zaten dogrulanmis kampanya
         foreach (var campaign in campaigns)
         {
-            if (nonCombinableApplied) break;
 
             foreach (var promo in campaign.Promotions.OrderByDescending(x => x.Priority))
             {
@@ -25,9 +23,6 @@ public class PromotionEngine
                     continue;
 
                 ApplyPromotion(sale, promo);
-
-                if (!promo.IsCombinable)
-                    nonCombinableApplied = true;
             }
         }
 
@@ -79,7 +74,13 @@ public class PromotionEngine
                 .Where(i => group.Conditions.Any(c => c.ProductId == i.ProductId))
                 .Sum(i => i.Quantity);
 
-            return totalQty >= (group.MinQuantity ?? 0);
+            if (totalQty < (group.MinQuantity ?? 0))
+                return false;
+
+            if (group.MaxQuantity.HasValue && totalQty > group.MaxQuantity.Value)
+                return false;
+
+            return true;
         }
 
         var results = group.Conditions.Select(c => EvaluateCondition(sale, c));
@@ -262,26 +263,35 @@ public class PromotionEngine
 
             // item.ExtraPromotionName = benefit.BenefitGroup.Promotion.Campaign.Name;
 
+            var eligibleQty = item.Quantity - item.NonEligableQuantity;
+            if (eligibleQty <= 0)
+                continue;
+
+            var cappedQty = maxUsagePerCart.HasValue
+                ? Math.Min(eligibleQty, maxUsagePerCart.Value)
+                : eligibleQty;
+
             switch (benefit.Type)
             {
                 case BenefitType.PercentageDiscount:
-                    item.DiscountTotal += item.SalePrice * item.Quantity * (benefit.Value ?? 0) / 100;
+                    item.DiscountTotal += item.SalePrice * cappedQty * (benefit.Value ?? 0) / 100;
                     item.BenefitType = BenefitType.PercentageDiscount;
                     break;
 
                 case BenefitType.FixedAmountDiscount:
-                    item.DiscountTotal += (benefit.Value ?? 0) * item.Quantity;
+                    item.DiscountTotal += (benefit.Value ?? 0) * cappedQty;
                     item.BenefitType = BenefitType.FixedAmountDiscount;
                     break;
 
                 case BenefitType.FixedPrice:
                     var discount = Math.Max(0, item.SalePrice - (benefit.Value ?? item.SalePrice));
-                    item.DiscountTotal += discount * item.Quantity;
+                    item.DiscountTotal += discount * cappedQty;
                     item.BenefitType = BenefitType.FixedPrice;
                     break;
 
                 case BenefitType.FreeProduct:
                     var freeQty = Math.Min(benefit.Quantity ?? 1, maxUsagePerCart ?? int.MaxValue);
+                    freeQty = (int)Math.Min(freeQty, eligibleQty);
                     item.DiscountTotal += item.SalePrice * freeQty;
                     item.NonEligableQuantity += freeQty;
                     item.BenefitType = BenefitType.FreeProduct;
@@ -289,7 +299,7 @@ public class PromotionEngine
 
                 case BenefitType.BuyXPayY:
                     var maxSets = maxUsagePerCart ?? int.MaxValue;
-                    var set = Math.Min((int)(item.Quantity / benefit.BuyQuantity.Value), maxSets);
+                    var set = Math.Min((int)(eligibleQty / benefit.BuyQuantity.Value), maxSets);
                     var free = set * (benefit.BuyQuantity.Value - benefit.PayQuantity.Value);
                     item.DiscountTotal += free * item.SalePrice;
                     item.NonEligableQuantity += Convert.ToInt32(free);
